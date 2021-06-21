@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Читач</title>
+</head>
+<body>
+
+<div align="center">
+
+    <div>
+        <h1>Доступні книги</h1>
+    </div>
+
+    <div>
+        <form th:action="@{/index3}">
+            Введіть для пошуку-назву,категорію,автора,опис: <input type="text" name="keyword" th:value="${keyword}"
+                           required /> &nbsp; <input type="submit" value="Знайти" /> &nbsp;
+            <input type="button" value="Очистити" onclick="clearFilter()" />
+        </form>
+    </div>
+
+    <div>&nbsp;</div>
+
+    <div>
+        <table border="1" cellpadding="10">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Назва</th>
+                <th>Автор</th>
+                <th>Короткий опис</th>
+                <th>Ідентифікатор</th>
+                <th>Категорія</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book : ${listBooks}">
+                <td th:text="${book.id}">ID</td>
+                <td th:text="${book.name}">Назва</td>
+                <td th:text="${book.autor}">Автор</td>
+                <td th:text="${book.description}">Короткий опис</td>
+                <td th:text="${book.iden}">Ідентифікатор</td>
+                <td th:text="${book.category}">Категорія</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+        function clearFilter() {
+            window.location = "/";
+        }
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Редагування книги</title>
+</head>
+<body>
+<div align="center">
+    <h1>Редагування книги</h1>
+    <br />
+    <form action="#" th:action="@{/save}" th:object="${book}"
+          method="post">
+        <table border="0" cellpadding="10">
+            <tr>
+                <td>ID:</td>
+                <td><input type="text" th:field="*{id}" readonly="readonly" />
+                </td>
+            </tr>
+            <tr>
+                <td>Назва:</td>
+                <td><input type="text" th:field="*{name}" /></td>
+            </tr>
+            <tr>
+                <td>Автор</td>
+                <td><input type="text" th:field="*{autor}" /></td>
+            </tr>
+            <tr>
+                <td>Короткий опис</td>
+                <td><input type="text" th:field="*{description}" /></td>
+            </tr>
+            <tr>
+                <td>Ідентифікатор</td>
+                <td><input type="text" th:field="*{iden}" /></td>
+            </tr>
+            <tr>
+                <td>Категорія</td>
+                <td><input type="text" th:field="*{category}" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit">Зберегти</button></td>
+            </tr>
+
+        </table>
+    </form>
+
+</div>
+</body>
+</html>

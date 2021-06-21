@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Управління категоріями</title>
+</head>
+<body>
+
+<div align="center">
+
+    <div>
+        <h1>Управління категоріями</h1>
+        <a href="new_category">Створити нову категорію</a>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <table border="1" cellpadding="10">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Назва</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="category : ${listCategory}">
+                <td th:text="${category.id}">ID</td>
+                <td th:text="${category.name}">Назва</td>
+                <td><a th:href="@{'/edit_category/' + ${category.id}}">Редагувати</a>
+                    &nbsp;&nbsp;&nbsp; <a th:href="@{'/delete/' + ${category.id}}">Видалити</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+        function clearFilter() {
+            window.location = "/";
+        }
+    </script>
+</div>
+</body>
+</html>
