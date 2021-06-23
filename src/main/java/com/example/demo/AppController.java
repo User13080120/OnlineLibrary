@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,10 +48,28 @@ public class AppController {
     }
 
     @RequestMapping("/new")
-    public String showNewBookForm(Model model) {
+    public String showNewBookForm(Model model, @Param("keyword") String keyword) {
         Book book = new Book();
+        Category category = new Category();
+        List<Category> listCategory = service_.listAll(keyword);
+        model.addAttribute("listCategory", listCategory);
+        model.addAttribute("keyword", keyword);
         model.addAttribute("book", book);
+        model.addAttribute("category",category);
+        return "new_book";
+    }
 
+
+
+    @RequestMapping("/new_book")
+    public String showNewBookCatForm(Model model, @Param("keyword") String keyword) {
+        Book book = new Book();
+        Category category = new Category();
+        List<Category> listCategory = service_.listAll(keyword);
+        model.addAttribute("listCategory", listCategory);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("book", book);
+        model.addAttribute("category",category);
         return "new_book";
     }
 
@@ -81,11 +100,17 @@ public class AppController {
 
     }
 
+
     @RequestMapping("/edit/{id}")
-    public ModelAndView showEditBookForm(@PathVariable(name = "id") Long id) {
+    public ModelAndView showEditBookForm(@PathVariable(name = "id") Long id, Model model, @Param("keyword") String keyword) {
         ModelAndView modelAndView = new ModelAndView("edit_book");
         Book book = service.get(id);
         modelAndView.addObject("book", book);
+        Category category = new Category();
+        List<Category> listCategory = service_.listAll(keyword);
+        model.addAttribute("list2Category", listCategory);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("category",category);
 
         return modelAndView;
     }
@@ -104,10 +129,15 @@ public class AppController {
     @RequestMapping("/delete/{id}")
     public String deleteBook(@PathVariable(name = "id") Long id) {
         service.delete(id);
-
         return "redirect:/index2";
-
     }
+
+    @RequestMapping("/delete2/{id}")
+    public String deleteCategory(@PathVariable(name = "id") Long id) {
+        service_.delete(id);
+        return "redirect:/index2";
+    }
+
 
 }
 

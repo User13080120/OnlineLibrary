@@ -11,3 +11,5 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
             + "LIKE %?1%")
     public List<Category> findAll(String keyword);
 }
+
+

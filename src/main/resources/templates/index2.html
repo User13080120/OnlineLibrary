@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
@@ -11,7 +11,7 @@
 
     <div>
         <h1>Управління книгами</h1>
-        <a href="new">Додати книгу</a>
+        <a href="new" onclick="clickNew()">Додати книгу</a>
     </div>
 
     <div>
@@ -58,8 +58,11 @@
     </div>
     <script type="text/javascript">
         function clearFilter() {
-            window.location = "/";
+            window.location = "/index2";
         }
+        function clickNew() {
+                localStorage.setItem('category',"");
+            }
     </script>
 </div>
 </body>

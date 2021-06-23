@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
@@ -31,16 +31,29 @@
             </tr>
             <tr>
                 <td>Категорія</td>
-                <td><input type="text" th:field="*{category}" /></td>
+                <td>
+                    <select name="select"  id="selectCategory" onchange="fChange()">
+                        <option th:each="category: ${listCategory}" th:text="${category.name}"></option>
+                    </select>
+                </td>
             </tr>
 
             <tr>
                 <td colspan="2"><button type="submit">Зберегти</button></td>
+                <td><input type="text" id="input1" style="visibility: hidden" th:field="*{category}"/></td>
             </tr>
 
         </table>
-    </form>
 
+    </form>
+    <script type="text/javascript">
+        let cat = localStorage.getItem('category');
+        document.getElementById("selectCategory").options.selectedIndex = cat-1;
+        document.getElementById("input1").value =  document.getElementById("selectCategory").value;
+        function fChange() {
+            document.getElementById("input1").value =  document.getElementById("selectCategory").value;
+        }
+    </script>
 </div>
 </body>
 </html>
